@@ -1,0 +1,289 @@
+/* Bootstrap inspired */
+
+body {
+	color: #333;
+	background-color: #efefef;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 40px;
+}
+
+.hidden {
+	display: none !important;
+}
+
+
+:disabled {	
+	filter: alpha(opacity=65);
+	opacity: .65;
+	pointer-events: none;
+	cursor: not-allowed;
+}
+
+:disabled:hover,
+:disabled:focus,{
+	background-color: #fff;
+	border-color: #ccc;
+	
+}
+
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 0.2em;
+}
+
+table > thead > tr > th,
+table > tbody > tr > th,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > tbody > tr > td,
+table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+table > caption + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > th,
+table > thead:first-child > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+
+
+
+/* Self */
+
+p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+/* Icons*/ 
+
+span.fa {
+	font-size: 40px;
+}
+
+#dingButton {
+	width: 102px;
+}
+
+#tableButton {
+	width: 141px;
+}
+
+
+/* Elements */
+
+#chrono {
+	text-align: center;
+	font-size: 32vw;
+	margin-top: 0.1em;
+}
+
+
+.flexParent {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#controlButtons {
+	width: 193px;
+	margin: 10px 20px;
+}
+
+#timeControls {
+	width: 480px;
+	margin: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#timePresets {
+	width: 406px;
+	margin: 10px 20px;
+}
+
+input {
+	width: 80px;
+	height: 67px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 40px;
+	padding: 2px 5px;
+	border: 1px solid #d4d4d4;
+	border-radius: 0.2em;
+}
+
+label {
+	height: 73px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+
+#config {
+	width: 492px;
+	margin: 20px 20px;
+}
+
+
+#resultsTable {
+	width: 360px;
+	margin: auto;
+	margin-bottom: 80px;
+	margin-top: 20px;
+	font-size: 30px;
+}
+
+#tableHelp,
+#tableHelp > span.fa {
+	font-size: 30px;
+}
+
+#overlayTopLeft {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#imageOverlayLeft {
+	width: 20%;
+}
+
+#overlayBottomRight {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+#imageBottomRight {
+	width: 20%;  
+	position: absolute;
+  	bottom: 0;
+  	right: 0;
+}
+
+#overlayBottomLeft {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+#imageBottomLeft {
+	width: 10%;  
+	position: absolute;
+  	bottom: 0;
+  	left: 0;
+}
+
+
+/* https://stackoverflow.com/questions/396145/how-to-vertically-center-a-div-for-all-browsers 
+.absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+*/
+
+/* =============================================================================
+   Button groups: https://github.com/necolas/css3-github-buttons
+   ========================================================================== */
+
+/* Standard group
+   ========================================================================== */
+
+button {
+	position: relative;
+	overflow: visible;
+	display: inline-block;
+	padding: 0.2em 0.4em;
+	border: 1px solid #d4d4d4;
+	margin: 0;
+	text-decoration: none;
+	text-align: center;
+	font-size: 30px;
+	color: #333;
+	height: 71px;
+	white-space: nowrap;
+	cursor: pointer;
+	outline: none;
+	background-color: rgb(255, 255, 255);
+	border-radius: 0.2em;
+	/* IE hacks */
+	zoom: 1;
+	*display: inline;
+	border-radius: 8px;
+}
+
+button:hover,
+button:focus,
+button:active,
+button.active {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+
+.button-group {
+	display: inline-block;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	/* IE hacks */
+	zoom: 1;
+	*display: inline;
+}
+
+button + button,
+button + .button-group,
+.button-group + button,
+.button-group + .button-group {
+	margin-left: 15px;
+}
+
+.button-group li {
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+.button-group button {
+	float: left;
+	margin-left: -1px;
+}
+
+.button-group > button:not(:first-child):not(:last-child),
+.button-group li:not(:first-child):not(:last-child) button {
+	border-radius: 0;
+}
+
+.button-group > button:first-child,
+.button-group li:first-child button {
+	margin-left: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.button-group > button:last-child,
+.button-group li:last-child > button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+

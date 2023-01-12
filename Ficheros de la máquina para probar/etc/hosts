@@ -1,0 +1,6 @@
+127.0.0.1	localhost
+::1		localhost
+
+# Práctica SER
+192.168.200.4	ser
+192.168.200.4	onoser

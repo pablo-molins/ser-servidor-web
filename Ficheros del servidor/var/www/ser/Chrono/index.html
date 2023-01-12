@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+	<title>Chrono</title>
+
+	<meta charset="UTF-8"> 
+
+	<!-- Styles -->
+	<link type="text/css" href="css/font-awesome.min.css" rel="stylesheet">
+	<link type="text/css" href="css/main.css" rel="stylesheet">
+
+	<!-- Javascript -->
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+</head>
+
+<body onload="init();">
+
+	<div id="overlayTopLeft" class="cmude hidden">
+		<img id="imageOverlayLeft" src="images/logo_cmude_arriba.png" alt="Logo" aria-hidden="true">
+	</div>
+
+
+	<audio id="dingx1">
+		<source src="sounds/ding x1.mp3" type="audio/mpeg">
+	</audio>
+
+	<audio id="dingx2">
+		<source src="sounds/ding x2.mp3" type="audio/mpeg">
+	</audio>
+
+
+
+
+	<div id="chrono"><p></p></div>
+		
+
+	<div class="flexParent">
+
+		<div id="controlButtons" class="controls">
+			
+			<div class="button-group" role="group" aria-label="Chrono controls">
+				
+				<button type="button" id="initButton" aria-label="Comenzar" onclick="initChrono();">
+					<span class="fa fa-play" aria-hidden="true"></span>
+				</button>
+
+				<button type="button" id="pauseButton" aria-label="Pausar" onclick="pauseChrono();" disabled="">
+					<span class="fa fa-pause" aria-hidden="true"></span>
+				</button>
+
+				<button type="button" id="stopButton" aria-label="Stop" onclick="stopChronoAndRecord();" disabled="">
+					<span class="fa fa-stop" aria-hidden="true"></span>
+				</button>
+			</div>
+
+		</div>
+
+
+
+
+		<div id="timePresets">
+			<div id="bp" class="controls timePresets">
+				<div class="button-group" role="group">
+					<button type="button" onclick="changeTime(900);">
+						15 min
+					</button>
+
+					<button type="button" onclick="changeTime(420);">
+						07 min
+					</button>
+
+					<button type="button" onclick="changeTime(300);">
+						05 min
+					</button>
+
+				</div>
+			</div>
+
+			<div id="academic" class="controls hidden timePresets">
+				<div class="button-group" role="group">
+
+					<button type="button" onclick="changeTime(300);">
+						05 min
+					</button>
+
+					<button type="button" onclick="changeTime(240);">
+						04 min
+					</button>
+
+					<button type="button" onclick="changeTime(180);">
+						03 min
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div id="timeControls" class="controls flexParent">
+			<div>
+			<input id="minutesInput" class="timesControls" value="7" min=0 max=1440 type="number" aria-label="Minutos"><label for="minutesInput">min</label>
+			</div>
+			<div>
+			<input id="secondsInput" class="timesControls" value="0" max=59 min=0 type="number" aria-label="Segundos"><label for="secondsInput">s</label>
+			</div>
+
+			<div class="button-group" role="group">
+				<button type="button" id="resetButton" aria-label="Reset" onclick="resetChrono();">
+					<span class="fa fa-repeat" aria-hidden="true"></span>
+				</button>
+
+				<button type="button" id="configButton" aria-label="Configuración" onclick="toggleConfiguration();">
+					<span class="fa fa-cog" aria-hidden="true"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="flexParent">
+		<div id="bellConfig" class="button-group hidden">
+			<button type="button" id="dingButton6" aria-label="Activar/desactivar sonido" onclick="toggleDing(6);">
+				6 min <span id="" class="dingGlyphicon6 bell fa" aria-hidden="true"></span>
+			</button>
+			<button type="button" id="dingButton1" aria-label="Activar/desactivar sonido" onclick="toggleDing(1);">
+				1 min <span id="" class="dingGlyphicon1 bell fa" aria-hidden="true"></span>
+			</button>
+			<button type="button" id="dingButton0" aria-label="Activar/desactivar sonido" onclick="toggleDing(0);">
+				0 min <span class="dingGlyphicon0 bell fa" aria-hidden="true"></span><span class="dingGlyphicon0 bell fa" aria-hidden="true"></span>
+			</button>
+		</div>
+	</div>
+
+
+	<div class="flexParent">
+		<div id="config" class="button-group hidden">
+			<button type="button" id="dingButton" aria-label="Activar/desactivar sonido" onclick="toggleDings();">
+				<span id="dingGlyphicon" class="fa fa-bell" aria-hidden="true"></span>
+			</button>
+
+			<button type="button" id="presetsButton" aria-label="Cambiar tipo de debate" onclick="togglePresets();">
+			</button>
+
+			<button type="button" id="tableButton" aria-label="Mostrar/ocultar tabla" onclick="toggleTable();">
+				<span id="tableIcon" class="fa fa-times" aria-hidden="true"></span>
+				<span class="fa fa-table" aria-hidden="true"></span>
+			</button>
+
+			<button type="button" id="colourButton" aria-label="Cambiar esquema de color" onclick="toggleColours();" disabled="">
+				<span class="fa fa-circle" aria-hidden="true"></span>
+				<span class="fa fa-circle-o" aria-hidden="true"></span>
+			</button>
+		</div>
+	</div>
+
+
+
+	
+
+	<table id="resultsTable" class="hidden">
+		<thead>
+			<tr>
+				<th><span class="fa fa-sort-numeric-asc" aria-hidden="true"></i><span class="sr-only">Orden de intervención</span></th>
+				<th><span class="fa fa fa-arrows-h" aria-hidden="true"></i><span class="sr-only">Tiempo establecido</span></th>
+				<th><span class="fa fa fa-clock-o" aria-hidden="true"></i><span class="sr-only">Tiempo restante</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr id="tableHelp">
+				<td colspan="3">
+				Termina con <span class="fa fa-stop" aria-hidden="true" aria-label="Stop"></span> para guardar un tiempo.
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<div id="overlayBottomRight" class="cmude hidden">
+		<img id="imageBottomRight" src="images/logo_cmude_abajo.png" alt="Logo" aria-hidden="true">
+	</div>
+
+	<div id="overlayBottomLeft" class="cmude hidden">
+		<img id="imageBottomLeft" src="images/logo_cmude.png" alt="Logo" aria-hidden="true">
+	</div>
+		
+</body>
+</html>
