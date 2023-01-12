@@ -146,7 +146,35 @@ Y luego creamos el fichero con la contraseña (que nos pedirá por duplicado al 
 
 ## Segunda parte: un solo servidor para dos páginas
 
-Todos los pasos anteriores vas a poder probarlos sin ningún problema en tu máquina. Los siguientes pasos no podrás probarlos directamente, sino que necesitarás modificar el fichero de hosts para poder hacer que los dominios que se utilizan en las siguientes secciones redirijan a la misma máquina que has utilizado hasta ahora.
+Para poder hacer esta parte tenemos que modificar el fichero hosts de la máquina desde la que vayamos a probar nuestro servidor, que normalmente será la máquina desde la que estemos ejecutando VirtualBox.
 
-- Todo lo que había hasta ahora deberá ser accesible desde https://ser
-- Crea un nuevo servidor virtual que responda a peticiones realizadas a https://onoser. Incluye un nuevo index.html, diferente del creado anteriormente. Incluye también el test.php en dicho dominio.
+En caso de Ubuntu y sus distribuciones derivadas, es el fichero `/etc/hosts`. En él se añaden estas líneas:
+
+> `IP.de.la.VM ser`
+>
+> `ÌP.de.la.VM onoser`
+
+Con esta modificación, cuando escribamos https://ser o https://onoser en nuestro navegador, redigirá automáticamente a nuestro servidor.
+
+**Nota:** Recuerda volver a modificar el fichero `etc/hosts` para borrar esas dos líneas una vez termines con la práctica.
+
+### Todo lo que había hasta ahora deberá ser accesible desde https://ser
+
+Vamos crear un nuevo fichero en el directorio `/etc/nginx/sites-enabled/` para la información del `server` que contestará a https://ser. En ese nuevo fichero, moveremos todo lo que estaba en el `default` que hacía referencia al server que escucha el puerto 443, dejando solo en el `default` el server del puerto 80, que seguirá igual.
+
+En lo que hemos puesto en el nuevo fichero `/etc/nginx/sites-enabled/ser` incluimos lo que hemos sacado del `default` y hacemos dos modificaciones:
+
+- Del original `root /var/www` pasamos a `root /var/www/ser`.
+- Del original `server_name _` pasamos a `server_name ser`.
+
+La primera instrucción es para separar en dos carpetas distintas esta web y la otra que crearemos luego. La segunda instrucción es para decir que esta configuración solo afecta a la web que se accede con la url _ser_. Es la manera que tenemos de diferenciar una web de la otra.
+
+Por último, deberemos mover todo lo que estaba en `/var/www` a `/var/www/ser`.
+
+### Crea un nuevo servidor virtual que responda a peticiones realizadas a https://onoser. Incluye un nuevo index.html, diferente del creado anteriormente. Incluye también el test.php en dicho dominio.
+
+Creamos un nuevo fichero en el mismo directorio de siempre: `etc/nginx/sites-enabled/onoser`. Podemos copiar el fichero de `ser`, porque vamos a hacer una versión abreviada de él.
+
+Ponemos en `/var/www/onoser` el contenido de esta nueva página y cambiamos todos los parámetros de configuración acordemente. Puedes consultarlos directamente en el fichero.
+
+Ten especial cuidado con el `listen` y la parte de `default_server`, pues solo puede haber un `default_server` por puerto. El enunciado no dice nada, así que es correcto tanto si lo dejas solo en el `ser` o en el `onoser`, pero solo debería aparecer en uno de ellos.
