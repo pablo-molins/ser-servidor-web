@@ -1,6 +1,6 @@
 # ser-servidor-web
 
-## Instalar nginX
+## Instalar nginx
 
 Empezamos de forma similar a como lo hacemos siempre, actualizando los paquetes de nuestro sistema:
 
